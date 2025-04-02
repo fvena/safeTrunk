@@ -11,7 +11,7 @@ import { defineConfig } from "tsup";
 const nodeConfig: Options = {
   clean: true, // Remove previous build files before each build
   dts: true, // Generate TypeScript declaration files (.d.ts)
-  entry: ["src/index.ts"], // The entry points to your library. You can add more entry points if needed.
+  entry: ["src/index.ts", "src/cli.ts"], // The entry points to your library. You can add more entry points if needed.
   format: ["esm", "cjs"], // Generates both ESM and CJS formats simultaneously
   minify: true, // Minifies the output to reduce bundle size
   outDir: "./dist", // Directory where build files will be output

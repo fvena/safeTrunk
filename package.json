@@ -1,21 +1,14 @@
 {
-  "name": "safeTrunk",
+  "name": "safe-trunk",
   "version": "0.1.0",
   "description": "A simple, professional, and modern template for building and maintaining TypeScript libraries. This template integrates the best tools, workflows, and practices to help you focus on developing your library without worrying about setup.",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "bin": {
+    "safetrunk": "./dist/cli.js"
+  },
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
-  },
   "workspaces": [
     "playground"
   ],
@@ -51,11 +44,11 @@
   ],
   "size-limit": [
     {
-      "path": "dist/index.js",
+      "path": "dist/cli.js",
       "limit": "10 kB"
     },
     {
-      "path": "dist/index.cjs",
+      "path": "dist/cli.cjs",
       "limit": "10 kB"
     }
   ],
@@ -77,7 +70,6 @@
     "@commitlint/config-conventional": "^19.8.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@size-limit/preset-small-lib": "^11.2.0",
     "@swc/core": "^1.11.9",
     "@vitest/coverage-v8": "^3.0.8",
     "@vitest/ui": "^3.0.8",
@@ -87,10 +79,18 @@
     "personal-style-guide": "^0.6.0",
     "prettier": "^3.5.3",
     "semantic-release": "^24.2.3",
+    "size-limit": "^11.2.0",
+    "size-limit-preset-node-lib": "^0.3.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
     "unplugin-swc": "^1.5.1",
     "vitepress": "^1.6.3",
     "vitest": "^3.0.8"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "inquirer": "^12.5.0",
+    "ora": "^8.2.0"
   }
 }
