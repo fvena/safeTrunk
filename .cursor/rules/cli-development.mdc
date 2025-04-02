@@ -1,0 +1,58 @@
+---
+description: 
+globs: src/cli/**, bin/**
+alwaysApply: false
+---
+# CLI Development Guidelines for SafeTrunk
+
+Guidelines for developing the command-line interface of the SafeTrunk tool.
+
+## CLI Structure
+
+- Maintain executable scripts in bin/ directory and command handlers in src/
+- Main entry point must be bin/cli.ts with supporting modules in src/
+- CLI commands should be handled based on user input and configuration file directives
+
+## User Experience
+
+- Design clear and user-friendly command outputs
+- Provide intuitive progress indicators during execution
+- Support both quiet and verbose output modes via configuration
+- Provide detailed help messages for all commands and options
+- Offer contextual error feedback with potential solutions
+- Support graceful termination of operations
+
+## Output Formatting
+
+- Implement the ConsoleUI module for attractive terminal output
+- Use appropriate colors and formatting to highlight information
+- Implement progress bars and spinners for long-running operations
+- Format error messages distinctly from regular output
+- Implement ThemeManager for configurable visual appearance
+- Ensure output is readable in different terminal environments
+
+## Error Handling
+
+- Display friendly error messages with error codes
+- Provide context-specific help for common errors
+- Implement different verbosity levels for error details
+- Return appropriate exit codes based on error severity
+- Provide detailed debug information in verbose mode
+
+## Performance
+
+- Optimize startup time by lazy-loading non-critical modules
+- Minimize overhead for common operations
+- Cache expensive computational results when appropriate
+- Provide detailed performance statistics for bottleneck identification
+- Implement intelligent retry mechanisms for network operations
+
+## Security
+
+- Validate all user input to prevent injection attacks
+- Implement permission checks before file operations
+- Avoid executing commands with elevated permissions
+- Use content hashing for verifying external resources integrity
+- Do not store credentials in configuration files
+- Use environment variables for sensitive data
+- Isolate plugin execution for security
