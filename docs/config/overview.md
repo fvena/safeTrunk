@@ -1,6 +1,6 @@
 # Configuration Overview
 
-SafeTrunk can be configured through a configuration file, command-line options, and environment variables. This guide explains all available configuration options and how to use them effectively.
+The configuration management system for SafeTrunk provides a flexible way to configure the tool's behavior through various configuration file formats.
 
 ## Configuration File
 
@@ -10,173 +10,146 @@ SafeTrunk looks for configuration in the following files (in order):
 2. `safetrunk.config.js` (JavaScript)
 3. `safetrunk.config.json` (JSON)
 
-## Configuration Structure
+The configuration files are searched in the order listed above, and the first one found is used.
 
-Here's a complete configuration file with all available options:
+## Configuration Options
+
+### Basic Structure
 
 ```typescript
-import type { SafeTrunkConfig } from "safe-trunk";
+interface SafeTrunkConfig {
+  branches?: {
+    include?: string[]; // Glob patterns for branches to include
+    exclude?: string[]; // Glob patterns for branches to exclude
+  };
+  prePushSteps?: Step[]; // Steps to run before pushing
+  postPushSteps?: Step[]; // Steps to run after pushing
+  pullBeforeChecks?: boolean; // Whether to pull changes before running checks
+  feedback?: {
+    enableGamification?: boolean; // Enable gamification features
+    showImpactAreas?: boolean; // Show impact areas in feedback
+    suggestionLevel?: "none" | "minimal" | "normal" | "verbose";
+  };
+  messages?: Record<string, string>; // Custom messages for different events
+  errorReporting?: {
+    level?: "minimal" | "normal" | "detailed";
+    showStepOutput: boolean; // Show command output on failure
+    suggestFixes: boolean; // Show suggested fixes
+    stackTraces: boolean; // Include stack traces in errors
+  };
+}
+```
 
-export default {
-  // Branch configuration
-  branches: {
-    include: ["main", "develop", "feature/*"],
-    exclude: ["docs/*", "chore/*"],
+### Step Configuration
+
+Each step in `prePushSteps` and `postPushSteps` has the following structure:
+
+```typescript
+interface Step {
+  name: string; // Name of the step
+  command: string; // Command to execute
+  hideOutput?: boolean; // Whether to hide command output
+  parallel?: boolean; // Run in parallel with other steps
+  failOnError?: boolean; // Fail the process if step fails
+  branches?: {
+    include?: string[]; // Branch-specific glob patterns to include
+    exclude?: string[]; // Branch-specific glob patterns to exclude
+  };
+}
+```
+
+## Usage Examples
+
+### JSON Configuration
+
+```json
+{
+  "branches": {
+    "include": ["main", "release/*"],
+    "exclude": ["dev/*"]
   },
+  "prePushSteps": [
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "failOnError": true
+    },
+    {
+      "name": "test",
+      "command": "npm test",
+      "failOnError": true
+    }
+  ],
+  "feedback": {
+    "enableGamification": true,
+    "suggestionLevel": "normal"
+  }
+}
+```
 
-  // Pre-push steps configuration
+### TypeScript Configuration
+
+```typescript
+import type { SafeTrunkConfig } from "safetrunk";
+
+const config: SafeTrunkConfig = {
+  branches: {
+    include: ["main", "release/*"],
+    exclude: ["dev/*"],
+  },
   prePushSteps: [
     {
       name: "lint",
       command: "npm run lint",
-      hideOutput: false,
-      parallel: false,
       failOnError: true,
     },
     {
       name: "test",
-      command: "npm run test",
-      hideOutput: true,
-      parallel: false,
+      command: "npm test",
       failOnError: true,
     },
   ],
+  feedback: {
+    enableGamification: true,
+    suggestionLevel: "normal",
+  },
+};
 
-  // Post-push steps configuration
-  postPushSteps: [
-    {
-      name: "deploy",
-      command: "npm run deploy",
-      hideOutput: false,
-      parallel: false,
-      failOnError: false,
-    },
-  ],
+export default config;
+```
 
-  // Pull configuration
+## Default Configuration
+
+If no configuration file is found, the following default configuration is used:
+
+```typescript
+{
+  branches: {
+    include: ['*'],
+    exclude: [],
+  },
+  prePushSteps: [],
+  postPushSteps: [],
   pullBeforeChecks: true,
-
-  // Feedback configuration
   feedback: {
     enableGamification: true,
     showImpactAreas: true,
-    suggestionLevel: "normal", // 'none' | 'minimal' | 'normal' | 'verbose'
+    suggestionLevel: 'normal',
   },
-
-  // Custom messages
-  messages: {
-    prePushStart: "Starting pre-push checks...",
-    prePushSuccess: "All checks passed! 🎉",
-    prePushFailure: "Some checks failed. Please fix the issues and try again.",
-  },
-
-  // UI configuration
+  messages: {},
   ui: {
-    theme: "default", // 'default' | 'minimal' | 'colorful'
+    theme: 'default',
     showProgress: true,
     quietMode: false,
   },
-
-  // Error reporting configuration
   errorReporting: {
-    level: "normal", // 'minimal' | 'normal' | 'detailed'
+    level: 'normal',
     showStepOutput: true,
     suggestFixes: true,
     stackTraces: false,
   },
-} satisfies SafeTrunkConfig;
-```
-
-## Configuration Options
-
-### Branch Configuration
-
-Control which branches are included in or excluded from checks:
-
-```typescript
-branches: {
-  include: string[]; // Glob patterns for branches to include
-  exclude: string[]; // Glob patterns for branches to exclude
 }
 ```
-
-### Pre-Push Steps
-
-Define steps to run before pushing changes:
-
-```typescript
-prePushSteps: {
-  name: string;      // Step name for display
-  command: string;   // Command to execute
-  hideOutput?: boolean; // Hide command output unless it fails
-  parallel?: boolean;   // Run in parallel with other steps
-  failOnError?: boolean; // Stop execution if step fails
-}[]
-```
-
-### Post-Push Steps
-
-Define steps to run after successful push:
-
-```typescript
-postPushSteps: {
-  // Same structure as prePushSteps
-}
-[];
-```
-
-### Pull Configuration
-
-```typescript
-pullBeforeChecks: boolean; // Pull latest changes before running checks
-```
-
-### Feedback Configuration
-
-Configure feedback and gamification features:
-
-```typescript
-feedback: {
-  enableGamification: boolean; // Enable achievement system
-  showImpactAreas: boolean; // Show affected areas of code
-  suggestionLevel: "none" | "minimal" | "normal" | "verbose";
-}
-```
-
-### UI Configuration
-
-Customize the user interface:
-
-```typescript
-ui: {
-  theme: "default" | "minimal" | "colorful";
-  showProgress: boolean; // Show progress indicators
-  quietMode: boolean; // Minimize output
-}
-```
-
-### Error Reporting
-
-Configure error reporting behavior:
-
-```typescript
-errorReporting: {
-  level: "minimal" | "normal" | "detailed";
-  showStepOutput: boolean; // Show command output on failure
-  suggestFixes: boolean; // Show suggested fixes
-  stackTraces: boolean; // Include stack traces in errors
-}
-```
-
-## Environment Variables
-
-All configuration options can be overridden using environment variables:
-
-| Variable            | Description           | Example                 |
-| ------------------- | --------------------- | ----------------------- |
-| `SAFETRUNK_CONFIG`  | Path to config file   | `./config/safetrunk.js` |
-| `SAFETRUNK_QUIET`   | Enable quiet mode     | `true`                  |
-| `SAFETRUNK_VERBOSE` | Enable verbose output | `true`                  |
 
 ## Command Line Options
 
@@ -189,7 +162,7 @@ safetrunk run --config ./custom-config.js --verbose
 ## Configuration Best Practices
 
 1. **Version Control**: Commit your configuration file to share settings with your team
-2. **Environment-Specific**: Use environment variables for environment-specific settings
+2. **TypeScript**: Use TypeScript configuration files for better type checking and IDE support
 3. **Documentation**: Comment your configuration file to explain custom settings
 4. **Minimal Configuration**: Start with minimal configuration and add as needed
 5. **Team Standards**: Align configuration with your team's workflow and standards

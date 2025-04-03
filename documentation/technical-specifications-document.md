@@ -21,11 +21,6 @@ export interface SafeTrunkConfig {
     suggestionLevel?: "none" | "minimal" | "normal" | "verbose";
   };
   messages?: Record<string, string>;
-  ui?: {
-    theme?: "default" | "minimal" | "colorful";
-    showProgress?: boolean;
-    quietMode?: boolean;
-  };
   errorReporting?: {
     level?: "minimal" | "normal" | "detailed";
     showStepOutput?: boolean;

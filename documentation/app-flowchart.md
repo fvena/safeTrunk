@@ -1,3 +1,6 @@
+# App flowchart
+
+```mermaid
 flowchart TD
 A[Start] --> B[Load Configuration File]
 B --> C{Config Exists?}
@@ -32,3 +35,4 @@ V --> W[End]
     style J fill:#BF616A,stroke:#333,stroke-width:2px,color:#fff
     style V fill:#5E81AC,stroke:#333,stroke-width:2px,color:#fff
     style W fill:#5E81AC,stroke:#333,stroke-width:2px,color:#fff
+```

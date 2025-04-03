@@ -102,6 +102,8 @@ export default {
 };
 ```
 
+For detailed configuration options and error handling, see our [Configuration Guide](https://safetrunk.dev/config/overview).
+
 ## Plugin System
 
 SafeTrunk supports plugins to extend its functionality. Create a plugin by implementing the `SafeTrunkPlugin` interface:
