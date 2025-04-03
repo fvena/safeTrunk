@@ -1,3 +1,9 @@
+# [1.2.0](https://github.com/fvena/safeTrunk/compare/v1.1.0...v1.2.0) (2025-04-03)
+
+### Features
+
+- design console output system ([7f16952](https://github.com/fvena/safeTrunk/commit/7f16952a2f23ee5e9474e3dc2b24ee97fccdfd6c))
+
 # [1.1.0](https://github.com/fvena/safeTrunk/compare/v1.0.0...v1.1.0) (2025-04-03)
 
 ### Features
