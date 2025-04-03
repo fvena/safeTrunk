@@ -169,6 +169,6 @@ safetrunk run --config ./custom-config.js --verbose
 
 For detailed information about specific configuration sections, see:
 
-- [Branch Configuration](/config/branch-config)
-- [Pre-Push Steps](/config/pre-push-steps)
-- [Feedback Options](/config/feedback-options)
+- Branch Configuration
+- Pre-Push Steps
+- Feedback Options

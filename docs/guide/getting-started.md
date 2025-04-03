@@ -126,15 +126,15 @@ When you run SafeTrunk, you'll see output like this:
 ## Next Steps
 
 - Learn about [Configuration Options](/config/overview)
-- Explore [Advanced Features](/guide/advanced-features)
-- Set up [Custom Plugins](/plugins/creating-plugins)
-- Join our [Community](/community)
+- Explore Advanced Features
+- Set up Custom Plugins
+- Join our Community
 
 ## Troubleshooting
 
 If you encounter any issues:
 
-1. Check the [Common Issues](/guide/troubleshooting) guide
+1. Check the Common Issues guide
 2. Ensure your Node.js version meets the requirements
 3. Verify your Git configuration
 4. Check our [GitHub Issues](https://github.com/fvena/safeTrunk/issues)

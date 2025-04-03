@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --clear-screen=false src/index.ts"
+    "dev": "tsx watch --clear-screen=false src/index.ts",
+    "safe-trunk": "safe-trunk run"
   },
   "dependencies": {
-    "typescript-library-template-pro": "*"
+    "safe-trunk": "*"
   },
   "devDependencies": {
     "tsx": "^4.6.2",

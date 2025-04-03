@@ -6,9 +6,9 @@
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { ConfigLoader } from "../src/config/loader";
-import { getDefaultConfig } from "../src/config/defaults";
-import { ConfigurationError } from "../src/utils/errors";
+import { ConfigLoader } from "../../src/config/loader";
+import { getDefaultConfig } from "../../src/config/defaults";
+import { ConfigurationError } from "../../src/utils/errors";
 
 describe("Configuration Management System", () => {
   const testDirectory = path.join(process.cwd(), "test-config");
