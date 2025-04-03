@@ -1,7 +1,7 @@
 ---
-description: Guidelines for Module Design and Public API
-globs: src/**, **/*.ts
-alwaysApply: false
+description: 
+globs: 
+alwaysApply: true
 ---
 # Module Design and Public API
 

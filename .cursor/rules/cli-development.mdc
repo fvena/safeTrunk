@@ -1,7 +1,7 @@
 ---
 description: 
-globs: src/cli/**, bin/**
-alwaysApply: false
+globs: 
+alwaysApply: true
 ---
 # CLI Development Guidelines for SafeTrunk
 

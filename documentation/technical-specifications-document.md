@@ -18,14 +18,11 @@ export interface SafeTrunkConfig {
   feedback?: {
     enableGamification?: boolean;
     showImpactAreas?: boolean;
-    suggestionLevel?: "none" | "minimal" | "normal" | "verbose";
+    showSuggestions?: boolean;
   };
   messages?: Record<string, string>;
   errorReporting?: {
-    level?: "minimal" | "normal" | "detailed";
     showStepOutput?: boolean;
-    suggestFixes?: boolean;
-    stackTraces?: boolean;
   };
 }
 

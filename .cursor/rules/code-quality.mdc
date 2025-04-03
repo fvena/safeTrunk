@@ -1,7 +1,7 @@
 ---
-description: TypeScript and Code Quality Guidelines
-globs: src/**, test/**, **/*.ts
-alwaysApply: false
+description: 
+globs: 
+alwaysApply: true
 ---
 # TypeScript and Code Quality Guidelines
 
