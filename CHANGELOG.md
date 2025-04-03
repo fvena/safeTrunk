@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/fvena/safeTrunk/compare/v1.0.0...v1.1.0) (2025-04-03)
+
+### Features
+
+- implement basic CLI command structure ([fafe34d](https://github.com/fvena/safeTrunk/commit/fafe34d1350594addb4a3652be42d11409c4fb3e))
+
 # 1.0.0 (2025-04-03)
 
 ### Features
